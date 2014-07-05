@@ -7,6 +7,7 @@ var EventHandler = {
 
 	state : "up",
 	button : 0,
+	isTouchActive: false,
 
 	timeoutID : null,
 
@@ -30,6 +31,12 @@ var EventHandler = {
 
 		document.addEventListener( "keydown", bind( this, this.onKeyDown ), false );
 		document.addEventListener( "keyup", bind( this, this.onKeyUp ), false );
+
+		// Add touch events
+		document.addEventListener("touchstart", bind( this, this.onTouchStart), true);
+    document.addEventListener("touchmove", bind( this, this.onTouchMove), true);
+    document.addEventListener("touchend", bind( this, this.onTouchEnd), true);
+    document.addEventListener("touchcancel", bind( this, this.onToucheCancel), true);
 
 		canvas.addEventListener( 'contextmenu', function( event ) { event.preventDefault(); }, false );
 		canvas.onselectstart = function() { return false; };
@@ -70,7 +77,9 @@ var EventHandler = {
 
 		}
 
-		this.timeoutID = setTimeout( bind( this, this.onClickTimeout ), 250 );
+		if (!this.isTouchActive) {
+			this.timeoutID = setTimeout( bind( this, this.onClickTimeout ), 250 );
+		}
 
 	},
 
@@ -111,7 +120,7 @@ var EventHandler = {
 
 		}
 
-		if ( this.state === "drag" ) {
+		if ( this.state === "drag" || this.state === 'move' ) {
 
 			if ( this.button === 0 ) {
 
@@ -219,8 +228,6 @@ var EventHandler = {
 
 	onKeyUp : function( event ) {
 
-		// console.log( event.keyCode );
-
 		if ( event.keyCode === 32  /* SPACE */ ) {
 
 			Game.start();
@@ -252,6 +259,50 @@ var EventHandler = {
 
 		}
 
+	},
+
+	onTouchStart: function( event ) {
+		this.isTouchActive = true;
+
+    // Make specific actions
+    event.button = $('#flag-button').hasClass('active') ? 2 : 0;
+    event.type = 'mousedown';
+    event.clientX = event.changedTouches[0].clientX;
+    event.clientY = event.changedTouches[0].clientY;
+
+		this.getMouse( event, this.mouse );
+  	Camera.updateRay = true;
+
+    // Call global emulation
+    this.onMouseDown(event);
+	},
+
+	onTouchMove: function( event ) {
+    event.type = 'mousemove';
+    event.clientX = event.changedTouches[0].clientX;
+    event.clientY = event.changedTouches[0].clientY;
+
+
+    // Make specific actions
+    
+    // Call global emulation
+    this.onMouseMove(event);
+	},
+
+	onTouchEnd: function( event ) {
+    // Make specific actions
+
+		event.type = 'mouseup';
+    event.clientX = event.changedTouches[0].clientX;
+    event.clientY = event.changedTouches[0].clientY;
+    
+    // Call global emulation
+    this.onMouseUp(event);
+	},
+
+	onTouchCancel: function( event ) {
+
+    // Make specific actions
 	},
 
 	onResize : function( event ) {
