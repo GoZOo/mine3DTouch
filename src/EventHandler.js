@@ -33,10 +33,10 @@ var EventHandler = {
 		document.addEventListener( "keyup", bind( this, this.onKeyUp ), false );
 
 		// Add touch events
-		document.addEventListener("touchstart", bind( this, this.onTouchStart), true);
-    document.addEventListener("touchmove", bind( this, this.onTouchMove), true);
-    document.addEventListener("touchend", bind( this, this.onTouchEnd), true);
-    document.addEventListener("touchcancel", bind( this, this.onToucheCancel), true);
+		document.addEventListener("touchstart", bind( this, this.onTouchStart), false);
+    document.addEventListener("touchmove", bind( this, this.onTouchMove), false);
+    document.addEventListener("touchend", bind( this, this.onTouchEnd), false);
+    document.addEventListener("touchcancel", bind( this, this.onToucheCancel), false);
 
 		canvas.addEventListener( 'contextmenu', function( event ) { event.preventDefault(); }, false );
 		canvas.onselectstart = function() { return false; };
@@ -278,6 +278,8 @@ var EventHandler = {
 	},
 
 	onTouchMove: function( event ) {
+		event.preventDefault();
+    
     event.type = 'mousemove';
     event.clientX = event.changedTouches[0].clientX;
     event.clientY = event.changedTouches[0].clientY;
