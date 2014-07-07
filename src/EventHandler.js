@@ -267,6 +267,7 @@ var EventHandler = {
 		this.isTouchActive = true;
 
     // Make specific actions
+    event.button = 0; // First touch have to be considered as left button
     event.type = 'mousedown';
     event.clientX = event.changedTouches[0].clientX;
     event.clientY = event.changedTouches[0].clientY;
