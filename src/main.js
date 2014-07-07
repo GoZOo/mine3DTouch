@@ -103,20 +103,6 @@ function start() {
 
 	}
 
-
-  var flagbutton = document.createElement("div");
-  flagbutton.innerText = 'Flag';
-  flagbutton.id = 'flag-button';
-  $(flagbutton).addClass('icon-flag');
-  flagbutton.onclick = function() {
-  	$(this).toggleClass('active');
-  }
-
-  
-  
-	// var FlagButton = $('<div>').attr('id', 'flag-button').css({'position': 'absolute', 'left': 0, 'top': 0, 'color': 'white'}).html('Flag');
-	container.appendChild(flagbutton);
-
 	stats = new StatsJS();
 	stats.hide();
 
