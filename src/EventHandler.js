@@ -10,6 +10,7 @@ var EventHandler = {
 	isTouchActive: false,
 
 	timeoutID : null,
+	timeoutTouchID: null,
 
 	init : function() {
 
@@ -262,10 +263,11 @@ var EventHandler = {
 	},
 
 	onTouchStart: function( event ) {
+		// event.preventDefault();
 		this.isTouchActive = true;
 
     // Make specific actions
-    event.button = $('#flag-button').hasClass('active') ? 2 : 0;
+    // event.button = $('#flag-button').hasClass('active') ? 2 : 0;
     event.type = 'mousedown';
     event.clientX = event.changedTouches[0].clientX;
     event.clientY = event.changedTouches[0].clientY;
@@ -275,6 +277,9 @@ var EventHandler = {
 
     // Call global emulation
     this.onMouseDown(event);
+
+		// Make second button on touch more than 1 second
+    this.timeoutTouchID = setTimeout( bind( this, this.onTouchTimeout ), 1000, event );
 	},
 
 	onTouchMove: function( event ) {
@@ -292,6 +297,7 @@ var EventHandler = {
 	},
 
 	onTouchEnd: function( event ) {
+		// event.preventDefault();
     // Make specific actions
 
 		event.type = 'mouseup';
@@ -300,11 +306,25 @@ var EventHandler = {
     
     // Call global emulation
     this.onMouseUp(event);
+
+    clearTimeout( this.timeoutTouchID );
 	},
 
 	onTouchCancel: function( event ) {
 
     // Make specific actions
+	},
+
+	onTouchTimeout : function(event) {
+
+		// Make second button on touch more than 1 second
+		if ( this.state === "down" ) {
+
+      this.button = 2;
+	    this.onTouchEnd(event);
+
+		}
+
 	},
 
 	onResize : function( event ) {
