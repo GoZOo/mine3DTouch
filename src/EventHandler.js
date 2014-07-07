@@ -267,7 +267,6 @@ var EventHandler = {
 		this.isTouchActive = true;
 
     // Make specific actions
-    // event.button = $('#flag-button').hasClass('active') ? 2 : 0;
     event.type = 'mousedown';
     event.clientX = event.changedTouches[0].clientX;
     event.clientY = event.changedTouches[0].clientY;
