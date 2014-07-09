@@ -11,6 +11,7 @@ var EventHandler = {
 
 	timeoutID : null,
 	timeoutTouchID: null,
+	pinchPrecedent: 0,
 
 	init : function() {
 
@@ -22,6 +23,10 @@ var EventHandler = {
 	},
 
 	bind : function() {
+
+		Hammer.defaults.behavior.touchAction = 'pan-y';
+		Hammer(document.body).on('pinch', this.onPinch);
+		Hammer(document.body).on('doubletap', this.onDoubleTap);
 
 		canvas.addEventListener( 'mousemove', bind( this, this.onMouseMove ), false );
 		canvas.addEventListener( 'mousedown', bind( this, this.onMouseDown ), false );
@@ -38,6 +43,7 @@ var EventHandler = {
     document.addEventListener("touchmove", bind( this, this.onTouchMove), false);
     document.addEventListener("touchend", bind( this, this.onTouchEnd), false);
     document.addEventListener("touchcancel", bind( this, this.onToucheCancel), false);
+
 
 		canvas.addEventListener( 'contextmenu', function( event ) { event.preventDefault(); }, false );
 		canvas.onselectstart = function() { return false; };
@@ -181,7 +187,6 @@ var EventHandler = {
 
 			delta = event.wheelDelta || ( event.detail * -5 );
 			delta = 1 - delta * 0.0002;
-
 			Camera.zoom( delta );
 
 		}
@@ -289,7 +294,6 @@ var EventHandler = {
     event.clientX = event.changedTouches[0].clientX;
     event.clientY = event.changedTouches[0].clientY;
 
-
     // Make specific actions
     
     // Call global emulation
@@ -313,6 +317,31 @@ var EventHandler = {
 	onTouchCancel: function( event ) {
 
     // Make specific actions
+	},
+
+	onPinch: function( event ) {
+
+		event.preventDefault();
+		event.stopPropagation();
+
+		var zoom;
+		if (event.gesture.scale > this.pinchPrecedent) {
+			// Zoom in
+			zoom = 1 - event.gesture.scale * 0.009;
+		}
+		else {
+			// zoom out
+			zoom = 1 + event.gesture.scale * 0.009;
+		}
+
+		this.pinchPrecedent = event.gesture.scale;
+		Camera.zoom( zoom );
+	},
+
+	onDoubleTap: function( event ) {
+
+		event.preventDefault();
+		event.stopPropagation();
 	},
 
 	onTouchTimeout : function(event) {
