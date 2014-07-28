@@ -47,7 +47,7 @@
 
 	maxCubes = 10000
 
-	centerOffset = 0.20
+	centerOffset = 0 //0.20 default
 
 
 	window.onload = function() {
@@ -64,27 +64,22 @@
 <h1><img src="images/mine3d.png"></h1>
 
 	<div id="hud">
-		<div class="button left clear" id="menuButton">
-                    <!--<img src="img/tree-chart.png" alt="Total Primary Energy Consumption" />-->
-                    <div class="blobs">
-                        <div class="pb-1">
-                            <span class="cube-blob"></span>
-                        </div>
-                        
-                    </div>
-      
-                    
-                    
-        </div>
-		<div class="left newButton" id="newButton">
-        <div class="blobs">
-                        <div class="pb-1">
-                            <span class="cube-blob"></span>
-                        </div>
-                        
-                    </div>
-        
-        </div>
+		<div class="button cubebutton clear" id="menuButton">
+      <div class="blobs">
+          <div class="pb-1">
+              <span class="cube-blob"><span class="text">Menu</span></span>
+          </div>
+          
+      </div>        
+    </div>
+
+		<div class="cubebutton newButton" id="newButton">
+	    <div class="blobs">
+        <div class="pb-1">
+            <span class="cube-blob"><span class="text">New</span></span>
+        </div>       
+      </div>
+    </div>
 
 		<div class="element clear left settingsmenu" id="menu">
 
@@ -114,35 +109,34 @@
 				developed by <a href="http://egraether.com/">egraether</a><br />
                 designed by <a href="http://www.mattglanz.com">Sarah Kvasznizca</a>, <a href="http://www.ricardodesign.at/">Ricardo Gantschnigg</a><br/><br/>
 				
-                <div class="help">with help from 
-				<a href="http://hempt.at/">mph</a>, 
-				<a href="http://www.findologic.com/">felix hummel</a>, <br />
-				<a href="http://stravid.com/">stravid</a>,
-				<a href="http://cwinkler.multimediatechnology.at/">cwinkler</a>,
-				<a href="http://www.walmink.com/">wouter walmink</a>,  <br />
-                </div>
+        <div class="help">with help from 
+					<a href="http://hempt.at/">mph</a>, 
+					<a href="http://www.findologic.com/">felix hummel</a>, <br />
+					<a href="http://stravid.com/">stravid</a>,
+					<a href="http://cwinkler.multimediatechnology.at/">cwinkler</a>,
+					<a href="http://www.walmink.com/">wouter walmink</a>,  <br />
+        </div>
 			</div>
 
 			<div class="label">
-            <div class="help">
-				powered by 
-				<a href="http://code.google.com/p/glmatrix/">glMatrix.js</a>, 
-				<a href="https://github.com/sole/tween.js/">tween.js</a> <br />
-				and <a href="http://jquery.com/">jQuery</a>
-			</div>
+        <div class="help">
+					powered by 
+					<a href="http://code.google.com/p/glmatrix/">glMatrix.js</a>, 
+					<a href="https://github.com/sole/tween.js/">tween.js</a> <br />
+					and <a href="http://jquery.com/">jQuery</a>
+				</div>
 
-			<div class="label">
-				released under <a href="https://github.com/egraether/mine3D/blob/master/LICENSE.txt">MIT Licence</a>
-			</div>
+				<div class="label">
+					released under <a href="https://github.com/egraether/mine3D/blob/master/LICENSE.txt">MIT Licence</a>
+				</div>
 
-      <div class="label">
-        source available on <a href="https://github.com/egraether/mine3D">github</a>
-      </div>
+	      <div class="label">
+	        source available on <a href="https://github.com/egraether/mine3D">github</a>
+	      </div>
       
-      <div class="label">
-        <a href="./beta">to old design</a>
-      </div>
-			
+	      <div class="label">
+	        <a href="./beta">to old design</a>
+	      </div>
 			
 			</div>
 
@@ -227,32 +221,32 @@
 
 			<br/>
 			<table>
-            
-            <tr>
+	          
+	          <tr>
 				</tr>
 				<tr>
-                	<td class="statsue label"> times </td>
-                    <td class="easy"> <img class="stats" src="images/easy.png"><br/>
-                    easy </td>
-                    <td class="medium"> <img class="stats" src="images/medium.png"><br/>
-                    medium </td>
-                    <td class="hard"> <img class="stats" src="images/hard.png"><br/>
-                    hard </td>
+	              	<td class="statsue label"> times </td>
+	                  <td class="easy"> <img class="stats" src="images/easy.png"><br/>
+	                  easy </td>
+	                  <td class="medium"> <img class="stats" src="images/medium.png"><br/>
+	                  medium </td>
+	                  <td class="hard"> <img class="stats" src="images/hard.png"><br/>
+	                  hard </td>
 				</tr>
 				<tr>
 					<td>classic</td>
 					<td id="classiceasy"> - </td>
-                    <td id="classicmedium"> - </td>
-                    <td id="classichard"> - </td>
+	                  <td id="classicmedium"> - </td>
+	                  <td id="classichard"> - </td>
 				</tr>
 				<tr>
 					<td>sweep</td>
 					<td id="sweepeasy"> - </td>
 					<td id="sweepmedium"> - </td>
-                    <td id="sweepehard"> - </td>
+	                  <td id="sweepehard"> - </td>
 				</tr>
 			</table>
-<br/>
+	<br/>
 			<div class="label"> games won: <span id="gamesWon"> 0 </span> </div>
 			<div class="label"> games played: <span id="gamesPlayed"> 0 </span> </div>
 			<div class="label"> time played: <span id="timePlayed"> 0 </span> </div>
@@ -411,9 +405,9 @@
 	<div class="element centered" id="welcome">
 
 		<div class="left" id="intro">
-        
+      <div class="logo">  
         <img class="mine-lose" src="images/mine.png"><br/><br/>
-
+      </div>
 			<div class="label">
 				<h2><span class="title highlight"> Mine3D </span></h2>
         <h3><span class="subtitle">open beta</span></h3>
@@ -498,61 +492,12 @@
 
 	</div>
 
-	<div id="externals">
-
-		<div class="button right" id="feedbackButton"><img class="none" src="images/feedback.png"></div>
-
-		<div class="button right" id="shareButton"><img class="none" src="images/share_button.png"></div>
-
-		<div class="element clear right" id="share">
-
-			<div class="label">
-				copy and paste to your favorite <br />
-				social media:
-			</div>
-
-			<textarea>Mine3D - play 3D Minesweeper in WebGL: http://egraether.com/mine3d/</textarea>
-
-		</div>
-
-		<div class="element clear right" id="feedback">
-
-			<div class="label">
-				Please share your thoughts, ideas <br /> or troubles at
-				<a href="https://mine3d.uservoice.com">UserVoice</a>, 
-				<a href="http://www.reddit.com/r/gaming/comments/l2zbl/3d_minesweeper_in_webgl/">reddit</a> 
-				<br />or via Twitter <a href="http://twitter.com/#!/egraether">@egraether</a>.
-			</div>
-
-		</div>
-
-	</div>
-
 	<div id="info">
     <div class="element" id="timeDisplay"><img class="mine-time" src="images/mine-time.png"><br/>
     <span id="time"> 0 </span> /
     <span id="mines"> 10 </span> </div>
      </div>
      <img class="time-mine-brick" src="images/uhrzeiger.png">
-    
-<!-- Wolken -->
-
-	<img class="clouds1 none"src="images/clouds_01.png">
-    <img class="clouds2 none" src="images/wolken_01.png">
-    <img class="clouds3 none" src="images/clouds_02.png">
-    <img class="brick1 none" src="images/bricks_green_middle.png">
-    
-    <img class="faehnchen-menu" src="images/faehnchen_menue.png">
-    <img class="faehnchen-new" src="images/faehnchen_new.png">
-
-    
-    <!--<img class="quadcluster2" src="textures/quad2.png"> -->
-    <img class="onequad4 none" src="textures/wuerfel_01.png">
-    <img class="onequad5 none" src="textures/wuerfel_01.png">
-    
-    <img class="clouds4 none" src="images/clouds_04.png">
-    <img class="clouds5 none" src="images/clouds_05.png">
-    <img class="brick2 none" src="images/bricks_yellow_small.png">
     
 
 <!-- DO NOT CHANGE BELOW HERE -->
