@@ -373,6 +373,8 @@ var Menu = {
 
 	show : function() {
 
+
+		$('#hud').toggleClass('display');
 		$('#menu').show();
 		$('#menuButton').addClass( 'active' );
 
@@ -380,6 +382,8 @@ var Menu = {
 
 	hide : function() {
 
+
+		$('#hud').toggleClass('display');
 		$('#menu').hide();
 		$('#menuButton').removeClass( 'active' );
 
